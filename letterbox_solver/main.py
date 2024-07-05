@@ -71,5 +71,5 @@ def solver(letters, strategy): #letters should be a list containing 4 lists
 if __name__ == "__main__":
     letters = sys.argv[1]
     strategy = sys.argv[2]
-    dumb = {'strategy1': lbf.get_score1,'strategy2': lbf.get_score2, 'strategy3': lbf.get_score3 }
-    solver(letters, dumb[strategy])
+    dumb = {'1': lbf.get_score1,'2': lbf.get_score2, '3': lbf.get_score3 }
+    print(solver(letters, dumb[strategy]))
