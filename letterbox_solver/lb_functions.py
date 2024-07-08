@@ -1,4 +1,5 @@
 from itertools import permutations
+import numpy as np 
 
 
 letterfreq = {
@@ -10,6 +11,9 @@ letterfreq = {
   'Z': 0.074
 }
 
+
+def sig(x):
+    return 1/(1 + np.exp(-x+4))
 
 """This function simply returns the list of words that you are allowed to spell given the box
 configuration. The letters variable is just a string of the letters in an order."""
@@ -52,14 +56,14 @@ def get_possible_words(letters): #letters should be a list containing 4 lists
 
 
 
-"""Give a score that counts how many desired letters a word has in it. The desried letters 
-come from the desired variable that is a string of letters"""
+"""Just the len of the intersection"""
 def get_score1(word, letters):
     #they get points for each desired letter they have
     return len(set(word) & letters)
 
             
 
+"""len of interestion, then rewarded for starting and ending well"""
 def get_score2(word, letters):
     score1 = get_score1(word, letters)
 
@@ -85,15 +89,13 @@ def get_score3(word, letters):
     return score
 
 
+def get_score4(word, letters):
+    score = 0
+    shared_letters = (set(word) & letters)
+    for l in shared_letters:
+        score += (1/sig(letterfreq[l]))
+    return score
 
-
-
-
-
-
-
-
-    
 
 
 
@@ -104,15 +106,5 @@ def get_score3(word, letters):
 def order(score_dict):
     return sorted(list(score_dict.keys()), key = lambda word: score_dict[word], reverse=True)
     
-
-
-    
-
-
-
-
-
-
-
 
 

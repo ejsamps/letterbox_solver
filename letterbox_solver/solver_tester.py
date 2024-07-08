@@ -1,11 +1,18 @@
 from random import sample
 import sys
-import letterbox_solver as ls
+import main as ls
 import lb_functions as lbf
 
 
 import random
 from collections import Counter
+
+import statistics
+
+def calculate_variance(data):
+  return statistics.variance(data)
+
+
 
 
 letter_frequencies = {
@@ -36,18 +43,36 @@ def generate_unique_string_by_frequency(length=12):
 
 
 def tester(n):
+    fails = 0
     avg = 0
+    outs = []
     for _ in range(n):
         box = generate_unique_string_by_frequency()
-        if (out := ls.solver(box, lbf.get_score1)) != False:
+        if (out := ls.solver(box, lbf.get_score4)) != False:
+            outs.append(len(out))
             avg += len(out)
+        else:
+            fails += 1
+            
+          
+   
+      
+
         
     
-    print(avg/n)
+    print(f"average: {avg/n}")
+    print(f"variance: {calculate_variance(outs)}")
+    print(f"fail rate: {fails/n}")
+
+    
     return avg/n
         
         
 
+
+
+
+  
 if __name__ == "__main__":
     n = int(sys.argv[1])
     tester(n)
