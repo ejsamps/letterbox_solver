@@ -3,7 +3,7 @@ import lb_functions as lbf
 import sys
 
 
-def solver(letters, strategy): #letters should be a list containing 4 lists
+def solver(letters, strategy=lbf.get_score3): #letters should be a list containing 4 lists
     words = lbf.get_possible_words(letters)
     sequence = []
     
