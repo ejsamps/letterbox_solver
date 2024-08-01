@@ -59,7 +59,7 @@ def get_possible_words(letters): #letters should be a list containing 4 lists
 """Just the len of the intersection"""
 def get_score1(word, letters):
     #they get points for each desired letter they have
-    return len(set(word) & letters)
+    return len(set(word) & set(letters))
 
             
 
@@ -105,6 +105,41 @@ def get_score4(word, letters):
     
 def order(score_dict):
     return sorted(list(score_dict.keys()), key = lambda word: score_dict[word], reverse=True)
+
+
+
+
+
+def chosebest(words, letter_set, i):
+    score_dict = {word: get_score1(word,letter_set) for word in words}  
+    ranked = order(score_dict)
+    
+    if len(ranked) == 0:
+        return None
+    
+    chosen = ranked[i]
+
+    return chosen
+
+
+def update_letters(letter_set, chosen):
+    for l in (letter_set & set(chosen)):
+        letter_set.remove(l)
+    return letter_set
+
+
+def checkleft(words, chosen, letter_set):
+    left_words = filter(lambda word: chosen[0] == word[-1], words)
+    return chosebest(left_words, letter_set, 0)
+    #bestleft is either the best left word or None if there are no words to the left
+
+
+def checkright(words, chosen, letter_set):
+    right_words = filter(lambda word: chosen[-1] == word[0], words)
+    return chosebest(right_words, letter_set, 0)
+    #bestright is either the best right word or None if there are no words to the right
+
+    
     
 
 
