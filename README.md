@@ -1,1 +1,6 @@
-Hi hello this is a NYT game letterbox solver. Once you pull the repository, all you have to do is call the main.py file in the terminal, with the second argument the letters around the box in all caps. For example, 'ABCDEFGHIJKL' would be the second argument if the letters on each respective side were ABC, DEF GHI JKL. The 3rd argument is an optional keyword argument with options '1', '2' ,'3', or '4' that specifies which solving strategy you want to use.
+# NYT Letter Boxed Solver
+
+This is a command-line solver for the New York Times **Letter Boxed** word game.
+
+Given the 12 letters arranged around the box (in order), the solver finds valid solutions using one of several strategies.
+
